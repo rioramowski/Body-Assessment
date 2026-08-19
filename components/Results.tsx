@@ -39,7 +39,9 @@ export default function Results({ result }: { result: AssessmentResult }) {
 
         <p className="mt-4 text-center text-slate-600">{result.tierDescription}</p>
 
-        <p className="mt-4 text-center text-slate-600">{copy.worseningLine}</p>
+        {result.tierId !== "ahead" && (
+          <p className="mt-4 text-center text-slate-600">{copy.worseningLine}</p>
+        )}
 
         {result.topFactors.length > 0 && (
           <div className="mt-8 rounded-xl border border-slate-200 bg-white p-6">

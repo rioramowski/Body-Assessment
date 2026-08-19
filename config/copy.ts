@@ -77,7 +77,7 @@ export const COPY = {
       },
       critical: {
         headline: "This Needs Attention Now",
-        body: "If this number hits you in the gut, that's good. It means you're still in time to change it. Men in this tier usually see things get noticeably worse over the next 5-10 years: more meds, more weight around the middle, slower recoveries, and needing help with simple physical tasks. If you're a U.S. C-suite executive or business owner over 50 earning $150K+/year and you don't want that to be your story, my 12-month C-Suite Rebuild program is built specifically for you. With the right plan, the next decade can instead look like fewer meds, less weight around your midsection, and still being the one who carries the bags, climbs the stairs, and keeps up on trips.",
+        body: "Your number puts you in the highest-risk group we see, and this isn't a slow drift. Left unaddressed, this is a trajectory: more medications, a body that takes longer to bounce back from every setback, and a real chance you end up depending on other people for things you used to do without thinking, like stairs, luggage, or keeping up on a walk. If you're a U.S. C-suite executive or business owner over 50 earning $150K+/year, my 12-month C-Suite Rebuild program is built specifically to turn this around. It takes a real plan from here, not luck, but with the right one, the next decade can still look like fewer meds instead of more, faster recovery instead of slower, and being the one who carries the bags and keeps up, not the one who gets left behind.",
         preButtonNote:
           "On this call, we'll go through your results in detail and see if the C-Suite Rebuild program is the right fit to get ahead of this.",
       },
