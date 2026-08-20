@@ -23,8 +23,7 @@ export const COPY = {
   },
   contact: {
     headline: "Almost done. Where should we send your results?",
-    subheadline:
-      "Your Body Age and full breakdown will appear right after this. We'll also send a copy to your email (and text you if anything looks especially concerning).",
+    subheadline: "Your Body Age and full breakdown will appear right after this.",
     firstNameLabel: "First name",
     firstNamePlaceholder: "John",
     lastNameLabel: "Last name",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QUESTIONS } from "@/config/questions";
 import { Answers, AssessmentResult, QualifyingAnswers } from "@/lib/types";
 import Landing from "@/components/Landing";
@@ -16,6 +16,10 @@ export default function AssessmentApp() {
   const [answers, setAnswers] = useState<Answers>({});
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [result, setResult] = useState<AssessmentResult | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [phase]);
 
   function handleAnswer(value: string | number) {
     const question = QUESTIONS[currentIndex];
