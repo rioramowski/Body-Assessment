@@ -17,13 +17,13 @@ export const AGE_MODIFIERS: Record<string, Record<string, ScoreEntry>> = {
       years: 4,
       label: "visible belly fat",
       explanation:
-        "You said your midsection has noticeable belly fat. That visceral fat is what's been driving the inflammation blocking the fat loss you've probably already tried for, and it won't move until the underlying pattern changes.",
+        "You said your midsection has noticeable belly fat. That visceral fat is what's been driving inflammation that blocks fat loss, and it won't move until the underlying pattern changes.",
     },
     significant: {
       years: 7,
       label: "significant belly fat",
       explanation:
-        "You said you're carrying significant belly fat. That's the kind of visceral fat tied to insulin resistance and inflammation, which is exactly why past diet attempts likely stalled or bounced back, not a willpower problem.",
+        "You said you're carrying significant belly fat. That's the kind of visceral fat tied to insulin resistance and inflammation, and it's a metabolic issue, not a willpower problem.",
     },
   },
   weight_trend: {
@@ -54,7 +54,7 @@ export const AGE_MODIFIERS: Record<string, Record<string, ScoreEntry>> = {
       years: 6,
       label: "no strength training",
       explanation:
-        "You reported no regular strength training, which is a big reason you've been losing muscle and strength each year after 50, and why 'trying harder' at random workouts hasn't worked.",
+        "You reported no regular strength training, which is a big reason you've been losing muscle and strength each year after 50, and that loss won't reverse on its own without resistance training specifically.",
     },
   },
   cardio: {
@@ -148,7 +148,7 @@ export const AGE_MODIFIERS: Record<string, Record<string, ScoreEntry>> = {
       years: 2,
       label: "short sleep",
       explanation:
-        "You said you sleep 5-6 hours a night. That's not enough for full hormonal and muscle recovery, which is why workouts and diet changes haven't stuck the way they should.",
+        "You said you sleep 5-6 hours a night. That's not enough for full hormonal and muscle recovery, which quietly caps how much progress any workout or diet effort can produce.",
     },
     under_five: {
       years: 4,
@@ -169,7 +169,7 @@ export const AGE_MODIFIERS: Record<string, Record<string, ScoreEntry>> = {
       years: 3,
       label: "reliance on caffeine or aids to function",
       explanation:
-        "You said you rely on caffeine or aids to function. That combo of poor sleep and stimulants makes it very hard to lose fat, rebuild muscle, or keep steady energy, no matter how much willpower you throw at it.",
+        "You said you rely on caffeine or aids to get through the day. Needing stimulants to function is usually a sign your body isn't recovering properly overnight, and that catches up with you.",
     },
   },
   stress: {
@@ -214,7 +214,7 @@ export const AGE_MODIFIERS: Record<string, Record<string, ScoreEntry>> = {
       years: 3,
       label: "daily energy crashes",
       explanation:
-        "You said you sleep short and get an afternoon crash every day. That combo makes it very hard to lose fat, rebuild muscle, or keep steady energy, no matter how much willpower you throw at it.",
+        "You said you get an afternoon energy crash every day. That's a strong sign of blood sugar swings or metabolic strain, and it makes steady energy and fat loss much harder no matter how disciplined you are otherwise.",
     },
   },
   independence_confidence: {
@@ -247,7 +247,10 @@ export interface TierConfig {
   // Upper bound (inclusive) of Health Age - chronological Age for this tier.
   // The last tier should use Infinity to catch everything above.
   maxDelta: number;
-  description: string;
+  // Either a fixed string, or an effort-conditional pair resolved against
+  // hasTrainingEffort (see lib/scoring.ts) so the description never praises
+  // effort someone didn't report.
+  description: string | { someEffort: string; noEffort: string };
 }
 
 export const TIERS: TierConfig[] = [
@@ -276,8 +279,12 @@ export const TIERS: TierConfig[] = [
     id: "critical",
     label: "Critical Risk",
     maxDelta: Infinity,
-    description:
-      "Several compounding factors are accelerating your Body Age well ahead of your calendar age, even though you've been trying to do the right things.",
+    description: {
+      someEffort:
+        "Several compounding factors are accelerating your Body Age well ahead of your calendar age, even though you've been trying to do the right things.",
+      noEffort:
+        "Several compounding factors are accelerating your Body Age well ahead of your calendar age, and right now, very little is working in your favor.",
+    },
   },
 ];
 

@@ -45,8 +45,19 @@ export function computeHealthAge(answers: Answers): AssessmentResult {
     .sort((a, b) => b.years - a.years)
     .slice(0, TOP_FACTORS_COUNT);
 
+  // Only "frequent" or "occasional" strength training counts as real effort.
+  // This must match exactly what the someEffort/noEffort copy claims (gym
+  // effort specifically), so it can never contradict the strength_training
+  // factor bullet above, which only ever fires for "rare" or "never".
   const hasTrainingEffort =
-    !(answers.strength_training === "never" && answers.cardio === "never");
+    answers.strength_training === "frequent" || answers.strength_training === "occasional";
+
+  const tierDescription =
+    typeof tier.description === "string"
+      ? tier.description
+      : hasTrainingEffort
+        ? tier.description.someEffort
+        : tier.description.noEffort;
 
   return {
     chronologicalAge,
@@ -54,7 +65,7 @@ export function computeHealthAge(answers: Answers): AssessmentResult {
     deltaYears: clampedDelta,
     tierId: tier.id,
     tierLabel: tier.label,
-    tierDescription: tier.description,
+    tierDescription,
     topFactors,
     hasTrainingEffort,
   };

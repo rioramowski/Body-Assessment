@@ -54,9 +54,9 @@ export const COPY = {
     // didn't report (or ignores real effort someone already reported).
     explanationClosingBullet: {
       someEffort:
-        "You've already been putting in real effort at the gym, so this isn't a motivation problem. What's dragging your score down is everything happening outside your workouts, recovery, sleep, stress, and the numbers you haven't been tracking, and that's exactly the gap a plan built for your age and schedule closes.",
+        "You've already been putting in real effort at the gym, so this isn't a motivation problem. What's dragging your score down is everything the bullets above are already pointing to, not a lack of effort, and that's exactly the gap a plan built for your age and schedule closes.",
       noEffort:
-        "You haven't had a real strength or cardio plan running yet, and that's a plan problem, not a willpower problem. Random effort without something built for your age, schedule, and recovery was never going to move the needle, and that's exactly what changes with the right one.",
+        "You haven't had a real strength training plan running yet, and that's a plan problem, not a willpower problem. Random effort without something built for your age, schedule, and recovery was never going to move the needle, and that's exactly what changes with the right one.",
     },
     // The pitch below each tier's score. Keyed by the tier ids defined in
     // config/scoring.ts (TIERS[].id). Button text/link stays the same across
