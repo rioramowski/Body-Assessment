@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QUESTIONS } from "@/config/questions";
 import { Answers, AssessmentResult, QualifyingAnswers } from "@/lib/types";
 import { trackEvent } from "@/lib/analytics";
@@ -26,6 +26,11 @@ export default function AssessmentApp() {
     phone: string;
   } | null>(null);
   const [utm] = useState<UtmParams>(() => getUtmParamsFromLocation());
+  // Guards against a double-click/double-tap on a single-select option
+  // firing handleAnswer twice before the 200ms transition completes, which
+  // would advance currentIndex by 2 off the same stale closure and could
+  // skip past the last question without ever hitting the "contact" phase.
+  const advancingRef = useRef(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,7 +42,13 @@ export default function AssessmentApp() {
     }
   }, [phase, currentIndex]);
 
+  useEffect(() => {
+    advancingRef.current = false;
+  }, [currentIndex, phase]);
+
   function handleAnswer(value: string | number) {
+    if (advancingRef.current) return;
+
     const question = QUESTIONS[currentIndex];
     const updatedAnswers = { ...answers, [question.id]: value };
     setAnswers(updatedAnswers);
@@ -52,6 +63,7 @@ export default function AssessmentApp() {
     };
 
     if (question.type === "single-select") {
+      advancingRef.current = true;
       setTimeout(advance, 200);
     } else {
       advance();
