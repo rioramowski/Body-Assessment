@@ -22,8 +22,9 @@ export const COPY = {
     progressLabel: (current: number, total: number) => `Question ${current} of ${total}`,
   },
   contact: {
-    headline: "Almost done. Where should we send your results?",
-    subheadline: "Your body age and full breakdown will appear right after this.",
+    headline: "Unlock Your Personalized Results",
+    subheadline:
+      "Enter your details below to reveal your true body age, your risk tier, and the factors driving your score.",
     firstNameLabel: "First name",
     firstNamePlaceholder: "John",
     lastNameLabel: "Last name",
