@@ -57,6 +57,37 @@ function validateQualifying(qualifying: QualifyingAnswers): string | null {
   return null;
 }
 
+// A transient network blip or momentary GHL hiccup shouldn't cost a lead.
+// Retries a few times with a short backoff before giving up; if every
+// attempt fails, logs the full payload so it's at least recoverable from
+// Vercel logs instead of silently vanishing.
+async function sendWebhookWithRetry(
+  url: string,
+  payload: Record<string, unknown>,
+  maxAttempts = 3
+): Promise<void> {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) return;
+      console.error(
+        `GHL webhook responded with ${response.status} (attempt ${attempt}/${maxAttempts})`,
+        await response.text().catch(() => "")
+      );
+    } catch (err) {
+      console.error(`Failed to reach GHL webhook (attempt ${attempt}/${maxAttempts})`, err);
+    }
+    if (attempt < maxAttempts) {
+      await new Promise((resolve) => setTimeout(resolve, attempt * 500));
+    }
+  }
+  console.error(`GHL webhook failed after ${maxAttempts} attempts. Submission:`, payload);
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
   const parsed = RequestSchema.safeParse(body);
@@ -116,21 +147,7 @@ export async function POST(req: NextRequest) {
   };
 
   if (webhookUrl) {
-    try {
-      const webhookResponse = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(webhookPayload),
-      });
-      if (!webhookResponse.ok) {
-        console.error(
-          `GHL webhook responded with ${webhookResponse.status}`,
-          await webhookResponse.text().catch(() => "")
-        );
-      }
-    } catch (err) {
-      console.error("Failed to reach GHL webhook", err);
-    }
+    await sendWebhookWithRetry(webhookUrl, webhookPayload);
   } else {
     console.warn(
       "GHL_WEBHOOK_URL is not set, skipping CRM webhook. Submission:",
