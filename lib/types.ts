@@ -49,4 +49,8 @@ export interface AssessmentResult {
   tierLabel: string;
   tierDescription: string;
   topFactors: ScoreFactor[];
+  // True if they reported any real strength training or cardio effort.
+  // False only when they answered "never" to both. Used to pick copy that
+  // doesn't falsely assume they've already been working out.
+  hasTrainingEffort: boolean;
 }

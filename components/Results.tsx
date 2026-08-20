@@ -13,6 +13,9 @@ export default function Results({ result }: { result: AssessmentResult }) {
   const tierStyle = TIER_STYLES[result.tierId] ?? "bg-slate-100 text-slate-800 border-slate-300";
   const diffYears = result.healthAge - result.chronologicalAge;
   const cta = copy.ctaByTier[result.tierId] ?? copy.ctaByTier["silent-slide"];
+  const closingBullet = result.hasTrainingEffort
+    ? copy.explanationClosingBullet.someEffort
+    : copy.explanationClosingBullet.noEffort;
 
   return (
     <div className="flex min-h-screen flex-col items-center px-6 py-16">
@@ -55,7 +58,7 @@ export default function Results({ result }: { result: AssessmentResult }) {
               ))}
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-accent">•</span>
-                <span className="text-slate-600">{copy.explanationClosingBullet}</span>
+                <span className="text-slate-600">{closingBullet}</span>
               </li>
             </ul>
           </div>

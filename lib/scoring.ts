@@ -45,6 +45,9 @@ export function computeHealthAge(answers: Answers): AssessmentResult {
     .sort((a, b) => b.years - a.years)
     .slice(0, TOP_FACTORS_COUNT);
 
+  const hasTrainingEffort =
+    !(answers.strength_training === "never" && answers.cardio === "never");
+
   return {
     chronologicalAge,
     healthAge,
@@ -53,5 +56,6 @@ export function computeHealthAge(answers: Answers): AssessmentResult {
     tierLabel: tier.label,
     tierDescription: tier.description,
     topFactors,
+    hasTrainingEffort,
   };
 }

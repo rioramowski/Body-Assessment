@@ -48,11 +48,16 @@ export const COPY = {
     worseningLine:
       "If nothing changes, this gap usually shows up over the next 5-10 years as more medications, slower recoveries from every injury or surgery, and your world shrinking: needing help with basic things like stairs and luggage and sitting on the sidelines while other people hike, travel, and play with your kids or grandkids.",
     explanationHeadline: "Why you scored this way",
-    // Static closing bullet appended after the answer-driven factors below,
-    // shown whenever at least one factor is listed. Ties the score back to
-    // why past training/diet effort hasn't worked, not just what's wrong.
-    explanationClosingBullet:
-      "You've been throwing effort at this with plans that were never built for a man your age, schedule, and recovery. This is why even 4-5 workouts a week and strict diets haven't delivered the body or confidence you expected.",
+    // Closing bullet appended after the answer-driven factors below, shown
+    // whenever at least one factor is listed. Picked based on
+    // result.hasTrainingEffort so it never falsely assumes effort someone
+    // didn't report (or ignores real effort someone already reported).
+    explanationClosingBullet: {
+      someEffort:
+        "You've already been putting in real effort at the gym, so this isn't a motivation problem. What's dragging your score down is everything happening outside your workouts, recovery, sleep, stress, and the numbers you haven't been tracking, and that's exactly the gap a plan built for your age and schedule closes.",
+      noEffort:
+        "You haven't had a real strength or cardio plan running yet, and that's a plan problem, not a willpower problem. Random effort without something built for your age, schedule, and recovery was never going to move the needle, and that's exactly what changes with the right one.",
+    },
     // The pitch below each tier's score. Keyed by the tier ids defined in
     // config/scoring.ts (TIERS[].id). Button text/link stays the same across
     // tiers. Only the headline, body, and pre-button note vary.
