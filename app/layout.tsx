@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Body Assessment for Executives Over 50",
   description:
-    "Answer 16 targeted questions to reveal your true Body Age, your risk tier, and what to fix first.",
+    "Answer 16 targeted questions to reveal your true body age, your risk tier, and the factors driving your score.",
 };
 
 export default function RootLayout({

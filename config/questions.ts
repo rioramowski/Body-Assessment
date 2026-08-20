@@ -186,7 +186,7 @@ export const QUESTIONS: Question[] = [
 
 // Dropdowns shown on the opt-in step (alongside name/email/phone) to qualify
 // the lead. These are not part of the scored quiz above and don't affect
-// Body Age. Edit prompts/options here; each becomes a required <select>.
+// body age. Edit prompts/options here; each becomes a required <select>.
 export const QUALIFYING_QUESTIONS: QualifyingQuestion[] = [
   {
     id: "location",
@@ -208,13 +208,13 @@ export const QUALIFYING_QUESTIONS: QualifyingQuestion[] = [
     ],
   },
   {
-    id: "role",
-    label: "What's your role?",
+    id: "urgency",
+    label: "When do you want to fix your health?",
     options: [
-      { value: "business_owner", label: "Business owner" },
-      { value: "csuite_executive", label: "C-suite executive" },
-      { value: "senior_leader", label: "Senior leader / VP / Director" },
-      { value: "other", label: "Other" },
+      { value: "right_now", label: "Right now" },
+      { value: "next_90_days", label: "Within the next 90 days" },
+      { value: "this_year", label: "Sometime this year" },
+      { value: "exploring", label: "I'm just exploring my options" },
     ],
   },
 ];

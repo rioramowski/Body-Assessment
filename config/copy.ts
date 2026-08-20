@@ -6,11 +6,11 @@ export const COPY = {
     eyebrow: "For C-Suite Executives & Business Owners Over 50 Earning $150K+/Year",
     headline: "Is Your Body Older Than You Are?",
     subheadline:
-      "Answer 16 targeted questions to reveal your true Body Age, your risk tier, and what to fix first.",
+      "Answer 16 targeted questions to reveal your true body age, your risk tier, and the factors driving your score.",
     bullets: [
       "Takes about 3 minutes",
       "16 targeted questions on your body, training, health markers, and lifestyle",
-      "Instant results – see your Body Age and risk tier right away",
+      "Instant results – see your body age and risk tier right away",
     ],
     startButton: "Start My Assessment",
     disclaimer:
@@ -23,7 +23,7 @@ export const COPY = {
   },
   contact: {
     headline: "Almost done. Where should we send your results?",
-    subheadline: "Your Body Age and full breakdown will appear right after this.",
+    subheadline: "Your body age and full breakdown will appear right after this.",
     firstNameLabel: "First name",
     firstNamePlaceholder: "John",
     lastNameLabel: "Last name",
@@ -33,13 +33,13 @@ export const COPY = {
     phoneLabel: "Mobile number",
     phonePlaceholder: "(555) 123-4567",
     selectPlaceholder: "Select one",
-    submitButton: "Reveal My Body Age",
+    submitButton: "Reveal My body age",
     submittingButton: "Calculating...",
     privacyNote: "We respect your privacy. No spam, ever.",
   },
   results: {
     realAgeSentence: (age: number) => `You are ${age} years old.`,
-    bodyAgeSentence: (bodyAge: number) => `Your Body Age is ${bodyAge}.`,
+    bodyAgeSentence: (bodyAge: number) => `Your body age is ${bodyAge}.`,
     differenceSentence: (diffYears: number) => {
       if (diffYears === 0) return "Difference: right in line with your current age.";
       const direction = diffYears > 0 ? "older" : "younger";

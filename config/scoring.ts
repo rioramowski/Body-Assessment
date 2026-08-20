@@ -281,9 +281,9 @@ export const TIERS: TierConfig[] = [
     maxDelta: Infinity,
     description: {
       someEffort:
-        "Several compounding factors are accelerating your Body Age well ahead of your calendar age, even though you've been trying to do the right things.",
+        "Several compounding factors are accelerating your body age well ahead of your calendar age, even though you've been trying to do the right things.",
       noEffort:
-        "Several compounding factors are accelerating your Body Age well ahead of your calendar age, and right now, very little is working in your favor.",
+        "Several compounding factors are accelerating your body age well ahead of your calendar age, and right now, very little is working in your favor.",
     },
   },
 ];
