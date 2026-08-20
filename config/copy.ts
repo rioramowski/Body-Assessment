@@ -46,7 +46,7 @@ export const COPY = {
       return `Difference: ${Math.abs(diffYears)} years ${direction} than your current age.`;
     },
     worseningLine:
-      "If nothing changes, this gap usually shows up over the next 5-10 years as more medications, slower recoveries from every injury or surgery, and your world shrinking: needing help with basic things like stairs and luggage and sitting on the sidelines while other people hike, travel, and play with your kids or grandkids.",
+      "If nothing changes, the next 5-10 years mean more medications, worse health markers, less energy and confidence, and more things your body simply can't do. Life starts looking more like managing your health, sitting things out, and depending on other people to do things you used to do yourself.",
     explanationHeadline: "Why you scored this way",
     // Closing bullet appended after the answer-driven factors below, shown
     // whenever at least one factor is listed. Picked based on
