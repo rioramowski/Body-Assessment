@@ -15,6 +15,7 @@ const RequestSchema = z.object({
   qualifying: z.record(z.string(), z.string()),
   honeypot: z.string().max(0).optional().default(""),
   answers: z.record(z.string(), z.union([z.string(), z.number()])),
+  utm: z.record(z.string(), z.string()).optional().default({}),
 });
 
 function validateAnswers(answers: Answers): string | null {
@@ -66,7 +67,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { firstName, lastName, email, phone, qualifying, honeypot, answers } = parsed.data;
+  const { firstName, lastName, email, phone, qualifying, honeypot, answers, utm } = parsed.data;
 
   // Honeypot field should always be empty for real users; a filled value
   // means a bot filled out every field on the form.
@@ -97,6 +98,7 @@ export async function POST(req: NextRequest) {
     name: `${firstName} ${lastName}`.trim(),
     email,
     phone,
+    ...utm,
     ...flattenedQualifying,
     chronologicalAge: result.chronologicalAge,
     healthAge: result.healthAge,

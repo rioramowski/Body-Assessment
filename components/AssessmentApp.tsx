@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { QUESTIONS } from "@/config/questions";
 import { Answers, AssessmentResult, QualifyingAnswers } from "@/lib/types";
+import { trackEvent } from "@/lib/analytics";
+import { getUtmParamsFromLocation, UtmParams } from "@/lib/utm";
 import Landing from "@/components/Landing";
 import QuizFlow from "@/components/QuizFlow";
 import ContactForm from "@/components/ContactForm";
@@ -16,10 +18,17 @@ export default function AssessmentApp() {
   const [answers, setAnswers] = useState<Answers>({});
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [result, setResult] = useState<AssessmentResult | null>(null);
+  const [utm] = useState<UtmParams>(() => getUtmParamsFromLocation());
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [phase]);
+
+  useEffect(() => {
+    if (phase === "quiz") {
+      trackEvent("quiz_progress", { question: currentIndex + 1 });
+    }
+  }, [phase, currentIndex]);
 
   function handleAnswer(value: string | number) {
     const question = QUESTIONS[currentIndex];
@@ -30,6 +39,7 @@ export default function AssessmentApp() {
       if (currentIndex + 1 < QUESTIONS.length) {
         setCurrentIndex((i) => i + 1);
       } else {
+        trackEvent("contact_form_reached");
         setPhase("contact");
       }
     };
@@ -72,6 +82,7 @@ export default function AssessmentApp() {
           qualifying: contact.qualifying,
           honeypot: contact.honeypot,
           answers,
+          utm,
         }),
       });
       const data = await res.json();
@@ -82,6 +93,7 @@ export default function AssessmentApp() {
         return;
       }
 
+      trackEvent("quiz_completed", { tier: data.result.tierId });
       setResult(data.result);
       setPhase("results");
     } catch {
@@ -91,7 +103,14 @@ export default function AssessmentApp() {
   }
 
   if (phase === "landing") {
-    return <Landing onStart={() => setPhase("quiz")} />;
+    return (
+      <Landing
+        onStart={() => {
+          trackEvent("quiz_started");
+          setPhase("quiz");
+        }}
+      />
+    );
   }
 
   if (phase === "quiz") {

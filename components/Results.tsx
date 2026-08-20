@@ -1,5 +1,6 @@
 import { COPY } from "@/config/copy";
 import { AssessmentResult } from "@/lib/types";
+import { trackEvent } from "@/lib/analytics";
 
 const TIER_STYLES: Record<string, string> = {
   ahead: "bg-emerald-100 text-emerald-800 border-emerald-300",
@@ -72,6 +73,7 @@ export default function Results({ result }: { result: AssessmentResult }) {
             href={copy.ctaButtonHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent("apply_click", { tier: result.tierId })}
             className="mt-4 inline-block w-full rounded-lg bg-ink px-8 py-4 text-lg font-semibold text-white transition hover:bg-slate-800 sm:w-auto"
           >
             {copy.ctaButton}
