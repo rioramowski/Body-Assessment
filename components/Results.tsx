@@ -66,8 +66,8 @@ export default function Results({ result }: { result: AssessmentResult }) {
 
         <div className="mt-10 rounded-xl border border-slate-200 bg-white p-6 text-center">
           <h3 className="text-lg font-semibold text-ink">{cta.headline}</h3>
-          <p className="mt-3 text-slate-600">{cta.body}</p>
-          <p className="mt-4 text-sm font-medium text-slate-500">{cta.preButtonNote}</p>
+          <p className="mt-3 text-left text-slate-600">{cta.body}</p>
+          <p className="mt-4 text-left text-sm font-medium text-slate-500">{cta.preButtonNote}</p>
           <a
             href={copy.ctaButtonHref}
             target="_blank"
