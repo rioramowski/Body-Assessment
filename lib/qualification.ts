@@ -34,7 +34,7 @@ export function getLeadTier(qualifying: QualifyingAnswers): LeadTier {
   return "red";
 }
 
-// Only Green leads get the booking CTA on the results page.
+// Green and Yellow leads get the booking CTA on the results page; Red does not.
 export function isQualified(qualifying: QualifyingAnswers): boolean {
-  return getLeadTier(qualifying) === "green";
+  return getLeadTier(qualifying) !== "red";
 }
