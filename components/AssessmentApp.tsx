@@ -18,6 +18,7 @@ export default function AssessmentApp() {
   const [answers, setAnswers] = useState<Answers>({});
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [result, setResult] = useState<AssessmentResult | null>(null);
+  const [isQualified, setIsQualified] = useState(false);
   const [utm] = useState<UtmParams>(() => getUtmParamsFromLocation());
 
   useEffect(() => {
@@ -93,8 +94,9 @@ export default function AssessmentApp() {
         return;
       }
 
-      trackEvent("quiz_completed", { tier: data.result.tierId });
+      trackEvent("quiz_completed", { tier: data.result.tierId, qualified: data.isQualified });
       setResult(data.result);
+      setIsQualified(data.isQualified);
       setPhase("results");
     } catch {
       setErrorMessage("Something went wrong. Please try again.");
@@ -141,7 +143,7 @@ export default function AssessmentApp() {
   }
 
   if (phase === "results" && result) {
-    return <Results result={result} />;
+    return <Results result={result} isQualified={isQualified} />;
   }
 
   return null;

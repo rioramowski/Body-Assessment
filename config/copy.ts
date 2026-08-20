@@ -86,7 +86,7 @@ export const COPY = {
           "On this call, we'll go through your results in detail and see if the C-Suite Rebuild program is the right fit to get ahead of this.",
       },
     } as Record<string, { headline: string; body: string; preButtonNote: string }>,
-    ctaButton: "Apply for a Rebuild Call",
+    ctaButton: "Book Your Rebuild Call",
     ctaButtonHref: "https://polarity-fitness.com/apply",
   },
 } as const;
