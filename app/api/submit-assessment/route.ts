@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { QUESTIONS, QUALIFYING_QUESTIONS } from "@/config/questions";
 import { computeHealthAge } from "@/lib/scoring";
-import { isQualified } from "@/lib/qualification";
+import { isQualified, getLeadTier } from "@/lib/qualification";
 import { Answers, QualifyingAnswers } from "@/lib/types";
 
 const RequestSchema = z.object({
@@ -83,6 +83,7 @@ export async function POST(req: NextRequest) {
 
   const result = computeHealthAge(answers);
   const qualified = isQualified(qualifying);
+  const leadTier = getLeadTier(qualifying);
   const timestamp = new Date().toISOString();
 
   const webhookUrl = process.env.GHL_WEBHOOK_URL;
@@ -108,6 +109,7 @@ export async function POST(req: NextRequest) {
     tier: result.tierLabel,
     topFactors: result.topFactors.map((f) => f.label).join("; "),
     isQualified: qualified,
+    leadTier,
     timestamp,
     source: "csuite-health-age-assessment",
     ...flattenedAnswers,
