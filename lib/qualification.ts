@@ -19,13 +19,17 @@ function isGreen(qualifying: QualifyingAnswers): boolean {
   );
 }
 
-// Yellow (B-lead): U.S. at $100K-$149K, or Canada at $150K+, with urgency
-// still in the top two options.
+// Yellow (B-lead): U.S. at $150K+ but with weaker urgency, or U.S. at
+// $100K-$149K with top-two urgency, or Canada at $150K+ with top-two urgency.
 function isYellow(qualifying: QualifyingAnswers): boolean {
-  if (!TOP_URGENCY.has(qualifying.urgency)) return false;
-  const usMidIncome = qualifying.location === "us" && qualifying.income === "100k_149k";
-  const canadaHighIncome = qualifying.location === "canada" && HIGH_INCOME.has(qualifying.income);
-  return usMidIncome || canadaHighIncome;
+  const topUrgency = TOP_URGENCY.has(qualifying.urgency);
+  const usHighIncomeLowUrgency =
+    qualifying.location === "us" && HIGH_INCOME.has(qualifying.income) && !topUrgency;
+  const usMidIncomeTopUrgency =
+    qualifying.location === "us" && qualifying.income === "100k_149k" && topUrgency;
+  const canadaHighIncomeTopUrgency =
+    qualifying.location === "canada" && HIGH_INCOME.has(qualifying.income) && topUrgency;
+  return usHighIncomeLowUrgency || usMidIncomeTopUrgency || canadaHighIncomeTopUrgency;
 }
 
 export function getLeadTier(qualifying: QualifyingAnswers): LeadTier {
