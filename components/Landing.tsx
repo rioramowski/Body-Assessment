@@ -9,7 +9,7 @@ export default function Landing({ onStart }: { onStart: () => void }) {
         <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">
           {landing.eyebrow}
         </p>
-        <h1 className="text-3xl font-bold leading-tight text-ink sm:text-4xl md:text-5xl">
+        <h1 className="text-4xl font-bold leading-tight text-ink sm:text-4xl md:text-5xl">
           {landing.headline}
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-lg text-slate-600">
