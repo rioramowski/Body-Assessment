@@ -4,7 +4,7 @@ export default function Landing({ onStart }: { onStart: () => void }) {
   const { landing } = COPY;
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-6 py-16">
+    <div className="flex min-h-screen flex-col items-center justify-start px-6 pb-16 pt-10 sm:justify-center sm:py-16">
       <div className="w-full max-w-2xl text-center">
         <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">
           {landing.eyebrow}
