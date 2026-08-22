@@ -36,7 +36,7 @@ export default function BookingFlow({
 }: {
   bookingContact: { firstName: string; lastName: string; email: string; phone: string };
   tierId: string;
-  onBack: () => void;
+  onBack?: () => void;
 }) {
   const { booking: copy } = COPY;
   const [status, setStatus] = useState<Status>("loading");
@@ -144,12 +144,14 @@ export default function BookingFlow({
   return (
     <div className="flex min-h-screen flex-col items-center px-6 py-16">
       <div className="w-full max-w-xl">
-        <button
-          onClick={onBack}
-          className="mb-6 text-sm font-medium text-slate-500 hover:text-ink"
-        >
-          ← {copy.backButton}
-        </button>
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="mb-6 text-sm font-medium text-slate-500 hover:text-ink"
+          >
+            ← {copy.backButton}
+          </button>
+        )}
 
         <h2 className="text-2xl font-semibold text-ink sm:text-3xl">{copy.headline}</h2>
         <p className="mt-2 text-slate-600">{copy.subheadline}</p>

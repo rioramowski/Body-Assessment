@@ -13,6 +13,13 @@ const RequestSchema = z.object({
   startTime: z.string().trim().min(1, "startTime is required"),
 });
 
+// Handles the CORS preflight the browser sends before the POST below,
+// since it carries a Content-Type header. next.config.mjs attaches the
+// actual Access-Control-Allow-Origin header to this response.
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204 });
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
   const parsed = RequestSchema.safeParse(body);
