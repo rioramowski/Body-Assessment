@@ -22,8 +22,6 @@
   var CONTAINER_ID = "polarity-booking-widget";
 
   var COPY = {
-    headline: "Pick a time for your Rebuild Call",
-    subheadline: "Choose a time that works for you. Your call books instantly, no extra steps.",
     loadingLabel: "Loading available times...",
     bookingLabel: "Booking your call...",
     emptyState: "No times are available right now. Please contact us directly to book your call.",
@@ -38,9 +36,8 @@
   };
 
   var STYLE = [
-    "#" + CONTAINER_ID + "{max-width:36rem;margin:0 auto;padding:2rem 1.5rem;font-family:inherit;}",
-    "#" + CONTAINER_ID + " .pbw-headline{font-size:1.5rem;font-weight:600;color:#0f172a;margin:0 0 .5rem;}",
-    "#" + CONTAINER_ID + " .pbw-subheadline{color:#475569;margin:0 0 1.5rem;}",
+    "@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');",
+    "#" + CONTAINER_ID + "{max-width:36rem;margin:0 auto;padding:2rem;font-family:'Poppins',-apple-system,sans-serif;background:#fff;border-radius:.75rem;border:1px solid #e2e8f0;box-shadow:0 4px 16px rgba(0,0,0,.15);}",
     "#" + CONTAINER_ID + " .pbw-loading,#" + CONTAINER_ID + " .pbw-empty{color:#475569;text-align:center;padding:2rem 0;}",
     "#" + CONTAINER_ID + " .pbw-error{border:1px solid #fecaca;background:#fef2f2;border-radius:.5rem;padding:1rem;margin-bottom:1rem;}",
     "#" + CONTAINER_ID + " .pbw-error p{color:#b91c1c;font-weight:500;font-size:.875rem;margin:0 0 .5rem;}",
@@ -206,8 +203,6 @@
       }
 
       var root = el("div", {});
-      root.appendChild(el("h2", { class: "pbw-headline", text: COPY.headline }));
-      root.appendChild(el("p", { class: "pbw-subheadline", text: COPY.subheadline }));
 
       if (state.status === "error") {
         var retryBtn = el("button", { text: COPY.retryButton });
