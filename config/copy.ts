@@ -1,5 +1,5 @@
-// All user-facing text and the external CTA link live here. Edit freely.
-// No other file needs to change when you update wording or the link.
+// All user-facing text lives here. Edit freely.
+// No other file needs to change when you update wording.
 
 export const COPY = {
   landing: {
@@ -88,6 +88,21 @@ export const COPY = {
       },
     } as Record<string, { headline: string; body: string; preButtonNote: string }>,
     ctaButton: "Book Your Rebuild Call",
-    ctaButtonHref: "https://polarity-fitness.com/apply",
+  },
+  booking: {
+    backButton: "Back to results",
+    headline: "Pick a time for your Rebuild Call",
+    subheadline:
+      "Choose a time that works for you. Your call books instantly, no extra steps.",
+    loadingLabel: "Loading available times...",
+    bookingLabel: "Booking your call...",
+    emptyState: "No times are available right now. Please contact us directly to book your call.",
+    loadError: "Couldn't load available times. Please try again.",
+    slotTakenError: "That time was just taken. Please pick another.",
+    bookError: "Couldn't book that call. Please try again.",
+    retryButton: "Try again",
+    confirmedHeadline: "You're booked!",
+    confirmedBody: (dateLabel: string, timeLabel: string) =>
+      `Your Rebuild Call is confirmed for ${dateLabel} at ${timeLabel}. We'll see you then.`,
   },
 } as const;

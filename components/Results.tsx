@@ -12,11 +12,11 @@ const TIER_STYLES: Record<string, string> = {
 export default function Results({
   result,
   isQualified,
-  bookingContact,
+  onBookClick,
 }: {
   result: AssessmentResult;
   isQualified: boolean;
-  bookingContact: { firstName: string; lastName: string; email: string; phone: string };
+  onBookClick: () => void;
 }) {
   const { results: copy } = COPY;
   const tierStyle = TIER_STYLES[result.tierId] ?? "bg-slate-100 text-slate-800 border-slate-300";
@@ -25,16 +25,6 @@ export default function Results({
   const closingBullet = result.hasTrainingEffort
     ? copy.explanationClosingBullet.someEffort
     : copy.explanationClosingBullet.noEffort;
-
-  // Carries the lead's info to the native GHL booking calendar via URL
-  // params (GHL's documented prefill mechanism for its calendar widget), so
-  // they never retype what they already gave us. Only name/email/phone go
-  // in the URL, never quiz answers, income, or score data.
-  const bookingUrl = new URL(copy.ctaButtonHref);
-  bookingUrl.searchParams.set("first_name", bookingContact.firstName);
-  bookingUrl.searchParams.set("last_name", bookingContact.lastName);
-  bookingUrl.searchParams.set("email", bookingContact.email);
-  bookingUrl.searchParams.set("phone", bookingContact.phone);
 
   return (
     <div className="flex min-h-screen flex-col items-center px-6 py-16">
@@ -88,15 +78,15 @@ export default function Results({
             <h3 className="text-lg font-semibold text-ink">{cta.headline}</h3>
             <p className="mt-3 text-left text-slate-600">{cta.body}</p>
             <p className="mt-4 text-left text-sm font-medium text-slate-500">{cta.preButtonNote}</p>
-            <a
-              href={bookingUrl.toString()}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent("apply_click", { tier: result.tierId })}
+            <button
+              onClick={() => {
+                trackEvent("book_flow_started", { tier: result.tierId });
+                onBookClick();
+              }}
               className="mt-4 inline-block w-full rounded-lg bg-ink px-8 py-4 text-lg font-semibold text-white transition hover:bg-slate-800 sm:w-auto"
             >
               {copy.ctaButton}
-            </a>
+            </button>
           </div>
         )}
       </div>
