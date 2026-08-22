@@ -9,9 +9,8 @@ import Landing from "@/components/Landing";
 import QuizFlow from "@/components/QuizFlow";
 import ContactForm from "@/components/ContactForm";
 import Results from "@/components/Results";
-import BookingFlow from "@/components/BookingFlow";
 
-type Phase = "landing" | "quiz" | "contact" | "submitting" | "results" | "booking";
+type Phase = "landing" | "quiz" | "contact" | "submitting" | "results";
 
 export default function AssessmentApp() {
   const [phase, setPhase] = useState<Phase>("landing");
@@ -168,23 +167,7 @@ export default function AssessmentApp() {
   }
 
   if (phase === "results" && result && bookingContact) {
-    return (
-      <Results
-        result={result}
-        isQualified={isQualified}
-        onBookClick={() => setPhase("booking")}
-      />
-    );
-  }
-
-  if (phase === "booking" && result && bookingContact) {
-    return (
-      <BookingFlow
-        bookingContact={bookingContact}
-        tierId={result.tierId}
-        onBack={() => setPhase("results")}
-      />
-    );
+    return <Results result={result} isQualified={isQualified} bookingContact={bookingContact} />;
   }
 
   return null;

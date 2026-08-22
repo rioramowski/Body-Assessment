@@ -88,6 +88,7 @@ export const COPY = {
       },
     } as Record<string, { headline: string; body: string; preButtonNote: string }>,
     ctaButton: "Book Your Rebuild Call",
+    ctaButtonHref: "https://polarity-fitness.com/apply",
   },
   booking: {
     backButton: "Back to results",
