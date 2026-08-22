@@ -95,7 +95,17 @@ export async function getFreeSlots(
         apiToken
       );
       if (res.ok) {
-        return (await res.json()) as FreeSlotsByDate;
+        const raw = (await res.json()) as Record<string, unknown>;
+        // The response includes a trailing "traceId" string alongside the
+        // per-date entries; keep only entries that actually look like
+        // { slots: string[] } so callers never have to know about it.
+        const slotsByDate: FreeSlotsByDate = {};
+        for (const [date, value] of Object.entries(raw)) {
+          if (value && typeof value === "object" && Array.isArray((value as { slots?: unknown }).slots)) {
+            slotsByDate[date] = value as { slots: string[] };
+          }
+        }
+        return slotsByDate;
       }
       lastError = new GhlApiError(`GHL free-slots responded with ${res.status}`, res.status);
     } catch (err) {
