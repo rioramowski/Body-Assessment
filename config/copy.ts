@@ -34,7 +34,7 @@ export const COPY = {
     phoneLabel: "Mobile number",
     phonePlaceholder: "(555) 123-4567",
     selectPlaceholder: "Select one",
-    submitButton: "Reveal My body age",
+    submitButton: "Reveal My Body Age",
     submittingButton: "Calculating...",
     privacyNote: "We respect your privacy. No spam, ever.",
   },
@@ -64,30 +64,31 @@ export const COPY = {
     // tiers. Only the headline, body, and pre-button note vary.
     ctaByTier: {
       ahead: {
-        headline: "Want To Extend Your Edge?",
-        body: "You're ahead of most men your age, and that's exactly why it's worth locking in now, not later. If you're a U.S. C-suite executive or business owner over 50 earning $150K+/year, my 12-month C-Suite Rebuild program helps you protect this edge without blowing up your career or schedule, so you're still leading from the front in your 60s and 70s.",
+        headline: "Want To Stay Ahead?",
+        body: "You're ahead of most men your age. The goal now is to keep it that way. The 12-month C-Suite Rebuild helps you stay lean, strong, and capable without taking over your schedule, so you can carry that edge into your 60s and 70s.",
         preButtonNote:
-          "On this call, we'll look at what it takes to keep your results compounding. No pressure, just a conversation.",
+          "On this call, we'll look at what's working, what could slip, and what it would take to keep building from here.",
       },
       "silent-slide": {
-        headline: "Where To Go From Here",
-        body: "You're not in crisis yet, but the next 5-10 years decide whether you stay active and independent or end up on the treadmill of meds and recurring injuries. If you're a U.S. C-suite executive or business owner over 50 earning $150K+/year, my 12-month C-Suite Rebuild program fixes these patterns now, before they get expensive, so you stay strong and independent through your 60s.",
-        preButtonNote: "On this call, we'll see if the C-Suite Rebuild program is a fit for you.",
+        headline: "Now Is The Time To Turn This Around",
+        body: "You're not in crisis, which is exactly why now is the time to act. The patterns showing up in your results tend to get harder to reverse the longer they're left alone. The C-Suite Rebuild helps you get stronger, leaner, and back in control before those problems become much harder to ignore.",
+        preButtonNote:
+          "On this call, we'll look at what's driving your results and whether the C-Suite Rebuild is the right next step.",
       },
       "red-zone": {
         headline: "This Is Fixable, But The Window Is Closing",
-        body: "If this number hits you in the gut, that's good. It means you're still in time to change it, before it becomes more meds, more weight, and needing help with simple physical tasks. If you're a U.S. C-suite executive or business owner over 50 earning $150K+/year, my 12-month C-Suite Rebuild program is built to turn this around, so the next decade looks like fewer meds and still being the one who carries the bags and keeps up.",
+        body: "Your results show this has moved beyond a few small issues, but there's still time to change the direction you're heading. The C-Suite Rebuild is built to help you rebuild your strength, improve your health, and get back in control before the next few years make it harder.",
         preButtonNote:
-          "On this call, we'll map out exactly what's driving your number and whether the C-Suite Rebuild program is the right fit to turn it around.",
+          "On this call, we'll walk through what's driving your results and what it would take to turn them around.",
       },
       critical: {
         headline: "This Needs Attention Now",
-        body: "Your number puts you in the highest-risk group we see, and left unaddressed, this is a trajectory: more medications, slower recovery, and a real chance you end up depending on others for things you used to do without thinking. If you're a U.S. C-suite executive or business owner over 50 earning $150K+/year, my 12-month C-Suite Rebuild program is built specifically to turn this around, so the next decade looks like fewer meds and being the one who keeps up, not the one who gets left behind.",
+        body: "Your results show several problems stacking up at once. If nothing changes, the likely direction is more medications, worse health markers, more weight, less physical capability, and eventually depending on other people for things you used to do yourself. The C-Suite Rebuild is built to help you reverse that trajectory and stay strong, capable, and independent.",
         preButtonNote:
-          "On this call, we'll go through your results in detail and see if the C-Suite Rebuild program is the right fit to get ahead of this.",
+          "On this call, we'll go through your results, identify the biggest priorities, and see if the C-Suite Rebuild is the right fit.",
       },
     } as Record<string, { headline: string; body: string; preButtonNote: string }>,
-    ctaButton: "Book Your Rebuild Call",
+    ctaButton: "Book My Transformation Call",
     ctaButtonHref: "https://polarity-fitness.com/apply",
   },
   booking: {
