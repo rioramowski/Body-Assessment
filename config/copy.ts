@@ -95,7 +95,7 @@ export const COPY = {
     eyebrow: "For U.S. C-Suite Executives & Business Owners Over 50 Earning $150K+/Year",
     headline: "Book Your 15-Minute Transformation Call",
     subheadline:
-      "We'll break down what your body age result reveals, pinpoint why years of hard work still haven't changed your body, and see whether the 12-Month C-Suite Rebuild can help you build a lean, strong, capable body that matches the success you've created everywhere else.",
+      "We'll review your body age result, uncover why years of effort haven't changed your body, and see whether the 12-Month C-Suite Rebuild can help you build a lean, strong, capable body that matches the success you've created everywhere else.",
     loadingLabel: "Loading available times...",
     bookingLabel: "Booking your call...",
     emptyState: "No times are available right now. Please contact us directly to book your call.",

@@ -142,22 +142,24 @@ export default function BookingFlow({
   const selectedDay = days.find((day) => day.date === selectedDate);
 
   return (
-    <div className="flex min-h-screen flex-col items-center px-6 py-16">
+    <div className="flex min-h-screen flex-col items-center px-6 pb-16 pt-8">
       <div className="w-full max-w-xl">
         {onBack && (
           <button
             onClick={onBack}
-            className="mb-6 text-sm font-medium text-slate-500 hover:text-ink"
+            className="mb-4 text-sm font-medium text-slate-500 hover:text-ink"
           >
             ← {copy.backButton}
           </button>
         )}
 
-        <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">
-          {copy.eyebrow}
-        </p>
-        <h2 className="text-2xl font-semibold text-ink sm:text-3xl">{copy.headline}</h2>
-        <p className="mt-2 text-slate-600">{copy.subheadline}</p>
+        <div className="text-center">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">
+            {copy.eyebrow}
+          </p>
+          <h2 className="text-2xl font-semibold text-ink sm:text-3xl">{copy.headline}</h2>
+          <p className="mt-2 text-slate-600">{copy.subheadline}</p>
+        </div>
 
         {status === "error" && (
           <div className="mt-6 rounded-lg border border-red-200 bg-red-50 p-4">
@@ -175,7 +177,7 @@ export default function BookingFlow({
 
         {(status === "ready" || status === "booking") && days.length > 0 && (
           <>
-            <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
+            <div className="mt-6 flex gap-2 overflow-x-auto pb-2">
               {days.map((day) => (
                 <button
                   key={day.date}
