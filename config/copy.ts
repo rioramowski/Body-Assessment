@@ -89,13 +89,13 @@ export const COPY = {
       },
     } as Record<string, { headline: string; body: string; preButtonNote: string }>,
     ctaButton: "Book My Transformation Call",
-    ctaButtonHref: "https://polarity-fitness.com/apply",
   },
   booking: {
     backButton: "Back to results",
-    headline: "Pick a time for your Rebuild Call",
+    eyebrow: "For U.S. C-Suite Executives & Business Owners Over 50 Earning $150K+/Year",
+    headline: "Book Your 15-Minute Transformation Call",
     subheadline:
-      "Choose a time that works for you. Your call books instantly, no extra steps.",
+      "We'll break down what your body age result reveals, pinpoint why years of hard work still haven't changed your body, and see whether the 12-Month C-Suite Rebuild can help you build a lean, strong, capable body that matches the success you've created everywhere else.",
     loadingLabel: "Loading available times...",
     bookingLabel: "Booking your call...",
     emptyState: "No times are available right now. Please contact us directly to book your call.",

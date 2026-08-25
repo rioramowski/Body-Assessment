@@ -153,6 +153,9 @@ export default function BookingFlow({
           </button>
         )}
 
+        <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">
+          {copy.eyebrow}
+        </p>
         <h2 className="text-2xl font-semibold text-ink sm:text-3xl">{copy.headline}</h2>
         <p className="mt-2 text-slate-600">{copy.subheadline}</p>
 
