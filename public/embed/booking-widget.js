@@ -5,7 +5,8 @@
  *
  * Mirrors components/BookingFlow.tsx: same state machine, same
  * instant-book-on-click behavior, same double-click guard, same explicit
- * loading/empty/error/confirmed states. Calls the same two API routes
+ * loading/empty/error states, and redirects to a thank-you page on success
+ * instead of an inline confirmation. Calls the same two API routes
  * (app/api/booking/slots, app/api/booking/book) that back the in-app
  * booking flow, so booking logic itself is never duplicated here, only
  * the presentation. Reads first_name/last_name/email/phone from the page
@@ -20,6 +21,9 @@
 
   var API_BASE = "https://quiz.polarity-fitness.com";
   var CONTAINER_ID = "polarity-booking-widget";
+  // Where a lead is sent immediately after a successful booking, instead of
+  // an inline confirmation state.
+  var THANK_YOU_URL = "https://polarity-fitness.com/before-your-call";
 
   var COPY = {
     loadingLabel: "Loading available times...",
@@ -29,10 +33,6 @@
     slotTakenError: "That time was just taken. Please pick another.",
     bookError: "Couldn't book that call. Please try again.",
     retryButton: "Try again",
-    confirmedHeadline: "You're booked!",
-    confirmedBody: function (dateLabel, timeLabel) {
-      return "Your Rebuild Call is confirmed for " + dateLabel + " at " + timeLabel + ". We'll see you then.";
-    },
   };
 
   var STYLE = [
@@ -52,9 +52,6 @@
     "@media(min-width:640px){#" + CONTAINER_ID + " .pbw-slots{grid-template-columns:repeat(4,1fr);}}",
     "#" + CONTAINER_ID + " .pbw-slot{border-radius:.5rem;border:1px solid #e2e8f0;background:#fff;color:#0f172a;padding:.75rem;font-size:.875rem;font-weight:500;cursor:pointer;}",
     "#" + CONTAINER_ID + " .pbw-slot:hover:not(:disabled){border-color:#0f172a;}",
-    "#" + CONTAINER_ID + " .pbw-confirmed{border:1px solid #e2e8f0;border-radius:.75rem;background:#fff;padding:2rem;text-align:center;}",
-    "#" + CONTAINER_ID + " .pbw-confirmed h2{font-size:1.5rem;font-weight:600;color:#0f172a;margin:0 0 .75rem;}",
-    "#" + CONTAINER_ID + " .pbw-confirmed p{color:#475569;margin:0;}",
   ].join("");
 
   function injectStyle() {
@@ -99,11 +96,10 @@
 
   function BookingWidget(container, contact) {
     var state = {
-      status: "loading", // loading | ready | empty | booking | confirmed | error
+      status: "loading", // loading | ready | empty | booking | error
       days: [],
       selectedDate: null,
       errorMessage: null,
-      confirmedSlot: null,
     };
     var isBooking = false; // double-click guard, same role as bookingRef in BookingFlow.tsx
     var timezone = Intl && Intl.DateTimeFormat ? Intl.DateTimeFormat().resolvedOptions().timeZone : "UTC";
@@ -172,7 +168,7 @@
             }
             return;
           }
-          setState({ status: "confirmed", confirmedSlot: slot });
+          window.location.href = THANK_YOU_URL;
         })
         .catch(function () {
           isBooking = false;
@@ -185,20 +181,6 @@
 
       if (state.status === "loading") {
         container.appendChild(el("div", { class: "pbw-loading", text: COPY.loadingLabel }));
-        return;
-      }
-
-      if (state.status === "confirmed" && state.confirmedSlot) {
-        var confirmedWrap = el("div", { class: "pbw-confirmed" }, [
-          el("h2", { text: COPY.confirmedHeadline }),
-          el("p", {
-            text: COPY.confirmedBody(
-              formatDateLabel(state.selectedDate || ""),
-              formatTimeLabel(state.confirmedSlot.startTime)
-            ),
-          }),
-        ]);
-        container.appendChild(confirmedWrap);
         return;
       }
 

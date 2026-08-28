@@ -103,8 +103,8 @@ export const COPY = {
     slotTakenError: "That time was just taken. Please pick another.",
     bookError: "Couldn't book that call. Please try again.",
     retryButton: "Try again",
-    confirmedHeadline: "You're booked!",
-    confirmedBody: (dateLabel: string, timeLabel: string) =>
-      `Your Rebuild Call is confirmed for ${dateLabel} at ${timeLabel}. We'll see you then.`,
+    // Where a lead lands immediately after a successful booking, instead of
+    // an in-app confirmation screen.
+    thankYouUrl: "https://polarity-fitness.com/before-your-call",
   },
 } as const;

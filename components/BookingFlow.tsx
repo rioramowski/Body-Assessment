@@ -14,7 +14,7 @@ interface DaySlots {
   slots: Slot[];
 }
 
-type Status = "loading" | "ready" | "empty" | "booking" | "confirmed" | "error";
+type Status = "loading" | "ready" | "empty" | "booking" | "error";
 
 function formatDateLabel(dateStr: string): string {
   const date = new Date(`${dateStr}T00:00:00`);
@@ -43,7 +43,6 @@ export default function BookingFlow({
   const [days, setDays] = useState<DaySlots[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [confirmedSlot, setConfirmedSlot] = useState<Slot | null>(null);
   // Guards against a rapid double-click booking two slots before the first
   // request resolves, the same pattern used for the quiz's double-click fix.
   const bookingRef = useRef(false);
@@ -106,8 +105,7 @@ export default function BookingFlow({
       }
 
       trackEvent("call_booked", { tier: tierId });
-      setConfirmedSlot(slot);
-      setStatus("confirmed");
+      window.location.href = copy.thankYouUrl;
     } catch {
       bookingRef.current = false;
       setErrorMessage(copy.bookError);
@@ -119,22 +117,6 @@ export default function BookingFlow({
     return (
       <div className="flex min-h-screen items-center justify-center px-6 py-16 text-center text-slate-600">
         {copy.loadingLabel}
-      </div>
-    );
-  }
-
-  if (status === "confirmed" && confirmedSlot) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center px-6 py-16 text-center">
-        <div className="w-full max-w-md rounded-xl border border-slate-200 bg-white p-8">
-          <h2 className="text-2xl font-semibold text-ink">{copy.confirmedHeadline}</h2>
-          <p className="mt-3 text-slate-600">
-            {copy.confirmedBody(
-              formatDateLabel(selectedDate ?? ""),
-              formatTimeLabel(confirmedSlot.startTime)
-            )}
-          </p>
-        </div>
       </div>
     );
   }
