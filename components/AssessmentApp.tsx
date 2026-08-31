@@ -10,7 +10,6 @@ import QuizFlow from "@/components/QuizFlow";
 import ContactForm from "@/components/ContactForm";
 import Results from "@/components/Results";
 import BookingFlow from "@/components/BookingFlow";
-import RevTrackTag from "@/components/RevTrackTag";
 
 type Phase = "landing" | "quiz" | "contact" | "submitting" | "results" | "booking";
 
@@ -180,14 +179,11 @@ export default function AssessmentApp() {
 
   if (phase === "booking" && result && bookingContact) {
     return (
-      <>
-        <RevTrackTag />
-        <BookingFlow
-          bookingContact={bookingContact}
-          tierId={result.tierId}
-          onBack={() => setPhase("results")}
-        />
-      </>
+      <BookingFlow
+        bookingContact={bookingContact}
+        tierId={result.tierId}
+        onBack={() => setPhase("results")}
+      />
     );
   }
 
