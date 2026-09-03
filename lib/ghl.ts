@@ -220,7 +220,7 @@ export async function bookSlot(
     contactId,
     startTime: startTimeIso,
     endTime: endTimeIso,
-    title: "Rebuild Call",
+    title: "Transformation Call",
   });
 
   return { appointmentId, contactId };
