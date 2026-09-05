@@ -217,4 +217,14 @@ export const QUALIFYING_QUESTIONS: QualifyingQuestion[] = [
       { value: "exploring", label: "I'm just exploring my options" },
     ],
   },
+  {
+    id: "fitness_goal",
+    label: "What's your #1 health and fitness goal right now?",
+    options: [
+      { value: "lose_20_lean", label: "Lose the last 20 pounds and get lean" },
+      { value: "lose_50_plus_health", label: "Lose 50+ pounds and improve overall health" },
+      { value: "build_muscle_strength", label: "Build muscle and get stronger" },
+      { value: "next_level_physique", label: "Take my current physique to the next level" },
+    ],
+  },
 ];
