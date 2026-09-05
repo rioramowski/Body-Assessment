@@ -3,6 +3,7 @@ import { z } from "zod";
 import { QUESTIONS, QUALIFYING_QUESTIONS } from "@/config/questions";
 import { computeHealthAge } from "@/lib/scoring";
 import { isQualified, getLeadTier } from "@/lib/qualification";
+import { logOptInCompleted } from "@/lib/sheets";
 import { Answers, QualifyingAnswers } from "@/lib/types";
 
 const RequestSchema = z.object({
@@ -146,14 +147,30 @@ export async function POST(req: NextRequest) {
     ...flattenedAnswers,
   };
 
-  if (webhookUrl) {
-    await sendWebhookWithRetry(webhookUrl, webhookPayload);
-  } else {
-    console.warn(
-      "GHL_WEBHOOK_URL is not set, skipping CRM webhook. Submission:",
-      webhookPayload
-    );
-  }
+  // Independent of each other: a Sheets outage should never affect the GHL
+  // webhook or the lead, and vice versa.
+  await Promise.all([
+    webhookUrl
+      ? sendWebhookWithRetry(webhookUrl, webhookPayload)
+      : Promise.resolve(
+          console.warn(
+            "GHL_WEBHOOK_URL is not set, skipping CRM webhook. Submission:",
+            webhookPayload
+          )
+        ),
+    logOptInCompleted({
+      firstName,
+      lastName,
+      email,
+      phone,
+      utm,
+      qualified,
+      leadTier,
+      chronologicalAge: result.chronologicalAge,
+      healthAge: result.healthAge,
+      tierLabel: result.tierLabel,
+    }),
+  ]);
 
   return NextResponse.json({ result, isQualified: qualified });
 }

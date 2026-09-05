@@ -71,6 +71,19 @@ export default function AssessmentApp() {
     }
   }
 
+  function handleBookClick() {
+    // Fire-and-forget: a metrics log should never delay or block the phase
+    // transition to the booking screen.
+    if (bookingContact) {
+      fetch("/api/sheets/calendar-viewed", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: bookingContact.email }),
+      }).catch(() => {});
+    }
+    setPhase("booking");
+  }
+
   function handleQuizBack() {
     if (currentIndex === 0) {
       setPhase("landing");
@@ -172,7 +185,7 @@ export default function AssessmentApp() {
       <Results
         result={result}
         isQualified={isQualified}
-        onBookClick={() => setPhase("booking")}
+        onBookClick={handleBookClick}
       />
     );
   }

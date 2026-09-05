@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { bookSlot, GhlApiError, GhlConfigError, GhlSlotUnavailableError } from "@/lib/ghl";
+import { logCalendarBooked } from "@/lib/sheets";
 
 const RequestSchema = z.object({
   firstName: z.string().trim().min(1, "First name is required").max(100),
@@ -32,6 +33,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const result = await bookSlot({ firstName, lastName, email, phone }, startTime);
+    await logCalendarBooked({ email, startTime });
     return NextResponse.json({ appointmentId: result.appointmentId, startTime });
   } catch (err) {
     if (err instanceof GhlSlotUnavailableError) {
