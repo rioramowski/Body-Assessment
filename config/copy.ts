@@ -3,12 +3,12 @@
 
 export const COPY = {
   landing: {
-    eyebrow: "For C-Suite Executives & Business Owners Over 50 Earning $150K+/Year",
+    eyebrow: "For High-Performing U.S. Men Over 50 Earning $150K+/Year",
     headline: "Is Your Body Older Than You Are?",
     subheadline:
       "Answer 16 targeted questions to reveal your true body age, your risk tier, and the factors driving your score.",
     bullets: [
-      "Takes about 3 minutes",
+      "Takes about 2 minutes",
       "16 targeted questions on your body, training, health markers, and lifestyle",
       "Instant results – see your body age and risk tier right away",
     ],
