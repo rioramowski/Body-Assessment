@@ -84,7 +84,11 @@ export async function logOptInCompleted(event: OptInCompletedEvent): Promise<voi
     event.utm.utm_source ?? "",
     event.utm.utm_medium ?? "",
     event.utm.utm_campaign ?? "",
-    event.utm.utm_content ?? "",
+    // Video slugs (e.g. "sep-11-2026") look exactly like a date to Sheets'
+    // USER_ENTERED parser, which silently converts them to a date serial
+    // instead of storing the literal text. A leading apostrophe forces it
+    // to stay text, same as typing one manually in the UI.
+    event.utm.utm_content ? `'${event.utm.utm_content}` : "",
     event.qualified ? "Y" : "N",
     event.leadTier,
     event.chronologicalAge,
