@@ -3,7 +3,7 @@
 
 export const COPY = {
   landing: {
-    eyebrow: "For High-Performing U.S. Men Over 50 Earning $150K+/Year",
+    eyebrow: "For U.S. Business Owners, Executives & Professionals Over 50 Earning $150K+/Year",
     headline: "Is Your Body Older Than You Are?",
     subheadline:
       "Answer 16 targeted questions to reveal your true body age, your risk tier, and the factors driving your score.",
