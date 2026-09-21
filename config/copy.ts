@@ -3,14 +3,13 @@
 
 export const COPY = {
   landing: {
-    eyebrow: "For U.S. Business Owners, Executives & Professionals Over 50 Earning $150K+/Year",
-    headline: "Is Your Body Older Than You Are?",
-    subheadline:
-      "Answer 16 targeted questions to reveal your true body age, your risk tier, and the factors driving your score.",
+    eyebrow: "For U.S. Business Owners, Executives & Professionals Over 50",
+    headline: "Are You Aging Faster Than You Realize?",
+    subheadline: "Discover your body age and see how it compares with your actual age.",
     bullets: [
-      "Takes about 2 minutes",
-      "16 targeted questions on your body, training, health markers, and lifestyle",
-      "Instant results – see your body age and risk tier right away",
+      "Find out if your body is older or younger than your actual age",
+      "Discover what may be causing your body to age faster",
+      "Get clear results and know where to focus first",
     ],
     startButton: "Start My Assessment",
     disclaimer:
