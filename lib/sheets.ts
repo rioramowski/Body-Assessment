@@ -98,6 +98,28 @@ export async function logOptInCompleted(event: OptInCompletedEvent): Promise<voi
   ]);
 }
 
+export async function logLandingPageViewed(event: { utm: Record<string, string> }): Promise<void> {
+  await appendRow([
+    new Date().toISOString(),
+    "landing_page_viewed",
+    "",
+    "",
+    "",
+    "",
+    event.utm.utm_source ?? "",
+    event.utm.utm_medium ?? "",
+    event.utm.utm_campaign ?? "",
+    // Same date-lookalike risk as opt_in_completed's utm_content below.
+    event.utm.utm_content ? `'${event.utm.utm_content}` : "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+}
+
 export async function logCalendarViewed(event: { email: string }): Promise<void> {
   await appendRow([
     new Date().toISOString(),

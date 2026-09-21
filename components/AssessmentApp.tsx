@@ -38,6 +38,26 @@ export default function AssessmentApp() {
   }, [phase]);
 
   useEffect(() => {
+    // Scoped per video (not globally) so the same browser can still count as
+    // a unique visitor for a different video's link later, but a reload or
+    // repeat visit from the same link doesn't inflate the count.
+    const dedupeKey = `polarity_landing_viewed:${utm.utm_content ?? "none"}`;
+    try {
+      if (localStorage.getItem(dedupeKey)) return;
+      localStorage.setItem(dedupeKey, "1");
+    } catch {
+      // Storage blocked (privacy mode, etc.) — log anyway rather than
+      // silently undercounting every visitor it happens to.
+    }
+    fetch("/api/sheets/landing-page-viewed", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ utm }),
+    }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (phase === "quiz") {
       trackEvent("quiz_progress", { question: currentIndex + 1 });
     }
