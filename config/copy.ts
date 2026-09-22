@@ -91,7 +91,7 @@ export const COPY = {
   },
   booking: {
     backButton: "Back to results",
-    eyebrow: "For U.S. C-Suite Executives & Business Owners Over 50 Earning $150K+/Year",
+    eyebrow: "For U.S. Business Owners, Executives & Professionals Over 50",
     headline: "Book Your 15-Minute Transformation Call",
     subheadline:
       "We'll review your body age result, uncover why years of effort haven't changed your body, and see whether the 12-Month C-Suite Rebuild can help you build a lean, strong, capable body that matches the success you've created everywhere else.",
